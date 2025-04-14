@@ -1,0 +1,2 @@
+- [Image link](https://hub.docker.com/repository/docker/mohago/k8s-go-101/)
+- Deploy using `kubectl create deployment k8s-go-101 --image=mohago/k8s-go-101`
