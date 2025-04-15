@@ -1,0 +1,3 @@
+- [Image link](https://hub.docker.com/r/mohago/k8s-go-102)
+- `docker run -e PORT=3030 -p 8080:3030 mohago/k8s-go-102`
+- `kubectl create deployment k8s-go-102 --image=mohago/k8s-go-102`
