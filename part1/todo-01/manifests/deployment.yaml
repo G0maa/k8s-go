@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-01-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-01
+  template:
+    metadata:
+      labels:
+        app: todo-01
+    spec:
+      containers:
+        - name: todo-01
+          image: mohago/k8s-go-102
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "256m"
