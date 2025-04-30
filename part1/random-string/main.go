@@ -2,17 +2,21 @@ package main
 
 import (
 	"fmt"
-	"time"
+	"os"
 
-	"github.com/google/uuid"
+	"github.com/g0maa/k8s-go/part1/random-string/health"
+	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
+func init() {
+	_ = godotenv.Load()
+}
 
 func main() {
-	uuid := uuid.New()
-	for {
-		fmt.Println("UUID:", uuid)
+	router := gin.Default()
 
-		time.Sleep(time.Second)
-	}
+	health.Register(router.Group("/health"))
+
+	router.Run(fmt.Sprintf(":%s", os.Getenv("PORT")))
 }

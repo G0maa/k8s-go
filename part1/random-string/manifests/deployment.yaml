@@ -14,8 +14,12 @@ spec:
     spec:
       containers:
         - name: random-string
-          image: mohago/k8s-go-101
+          image: mohago/k8s-go-101:latest
+          imagePullPolicy: Always
           resources:
             limits:
               memory: "128Mi"
               cpu: "256m"
+          env:
+          - name: PORT
+            value: "3030"
