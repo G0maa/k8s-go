@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: random-string-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: random-string
+  template:
+    metadata:
+      labels:
+        app: random-string
+    spec:
+      volumes:
+        - name: shared-logs
+          emptyDir: {}
+      containers:
+        - name: random-string-generator
+          image: mohago/k8s-go:ex110-generator
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "256m"
+          volumeMounts:
+            - name: shared-logs
+              mountPath: /usr/src/app
+          env:
+          - name: PORT
+            value: "3030"
+        - name: random-string-reader
+          image: mohago/k8s-go:ex110-reader
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "256m"
+          volumeMounts:
+            - name: shared-logs
+              mountPath: /usr/src/app
+          env:
+          - name: PORT
+            value: "3031"
